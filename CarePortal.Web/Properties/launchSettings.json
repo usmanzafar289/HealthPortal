@@ -1,0 +1,36 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/CarePortal.Web",
+      "sslPort": 0
+    },
+    "iisExpress": {
+      "applicationUrl": "http://localhost:44313/",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:44313/",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:44313/"
+    },
+    "CarePortal": {
+      "commandName": "IIS",
+      "launchBrowser": true,
+      //"launchUrl": "http://localhost/CarePortal.Web",
+      "launchUrl": "http://localhost:44313/",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      //"applicationUrl": "http://localhost:8471/"
+      "applicationUrl": "http://localhost:44313/"
+    }
+  }
+}

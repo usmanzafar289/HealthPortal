@@ -1,0 +1,48 @@
+@using CarePortal.Web.Extensions
+
+@if (LocalStorageExtensions.Exists(StorageType.Token))
+{
+    <div class="navbar-custom-menu">
+        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+            <ul class="nav navbar-nav">
+                <!-- User Account Menu -->
+                <li class="dropdown user user-menu">
+                    <!-- Menu Toggle Button -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <!-- The user image in the navbar-->
+                        <img src="@LocalStorageExtensions.Get(StorageType.Picture)" class="user-image">
+                        <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                        <span class="hidden-xs">@LocalStorageExtensions.Get(StorageType.Username)</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- The user image in the menu -->
+                        <li class="user-header">
+                            <img src="@LocalStorageExtensions.Get(StorageType.Picture)" class="img-circle">
+                            <p>
+                                @LocalStorageExtensions.Get(StorageType.Username)
+                            </p>
+                        </li>
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <div class="pull-left">
+                                <a class="btn btn-default btn-flat" asp-controller="Profile" asp-action="Index">Profile</a>
+                            </div>
+                            <div class="pull-right">
+                                <button type="submit" class="btn btn-default btn-flat">Log out</button>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </form>
+    </div>
+}
+else
+{
+    <div class="pull-right" style="margin: 7px;">
+        <a asp-area="" asp-controller="Account" asp-action="Register" class="btn btn-default btn-flat">Register</a>
+    </div>
+    <div class="pull-right" style="margin: 7px;">
+        <a asp-area="" asp-controller="Account" asp-action="Login" class="btn btn-default btn-flat">Log in</a>
+    </div>
+}

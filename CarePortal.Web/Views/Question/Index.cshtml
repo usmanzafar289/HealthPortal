@@ -1,0 +1,55 @@
+﻿@model CarePortal.Data.ViewModels.QuestionPageModel
+@using CarePortal.Web.Extensions
+
+@{
+    ViewData["Title"] = "Question";
+}
+
+@section Styles{
+    <link href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
+
+   
+}
+
+@section Scripts{
+    <script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/lang/summernote-ko-KR.min.js"></script>
+        <script src="~/js/Question.js"></script>
+
+}
+
+
+        <h1 class="mt-4">Question</h1>
+            <div class="row">
+                <div class="col-sm-8">
+                    <input type="text" placeholder="Enter Title" class="form-control" id="titleQuestion" style="margin-bottom: 10px;">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="panel panel-dark panel-alt timeline-post">
+                        <div class="panel-body">
+                            <textarea class="summernote" id="summernote"></textarea>
+                        </div>
+                        <div class="panel-footer" style="display: flow-root;">
+                            <div class="pull-left">
+                                <label class="col-sm-5 control-label">Doctor</label>
+                                <div class="col-sm-7">
+                                    @Html.DropDownList("DoctorInformation", (IEnumerable<SelectListItem>)Model.listDoctorsItems)
+                                </div>
+                            </div>
+                            <div class="pull-right">
+                                <a href="javascript:;" id="btnSubmitQuestion" class="btn btn-primary">Submit Question</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <img src="~/images/user.jpg" class="thumbnail img-responsive" id="imageDoctor">
+                    <h3 id="nameDoctor">Doctor One</h3>
+                    <div class="mb30"></div>
+                    <p class="mb30" id="descriptionDoctor">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat...</p>
+                    <a href="javascript:;" id="emailDoctor">doctor1@healthportal.com</a>
+                    <div class="mb30"></div>
+                </div>
+            </div>

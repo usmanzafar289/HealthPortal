@@ -1,0 +1,159 @@
+﻿@model CarePortal.Data.Models.AccountViewModels.LoginViewModel
+
+@{
+    Layout = "";
+    ViewData["Title"] = "Log in";
+}
+
+@*<h2>@ViewData["Title"]</h2>*@
+
+@*<div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <section>
+                    <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                        <h4>Use a local account to log in.</h4>
+                        <hr />
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label asp-for="RememberMe">
+                                    <input asp-for="RememberMe" />
+                                    @Html.DisplayNameFor(m => m.RememberMe)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default" style="background-color: lightgrey; border: 1px solid;">Log in</button>
+                        </div>
+                        <div class="form-group">
+                            <p>
+                                <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Register as a new user?</a>
+                            </p>
+                        </div>
+                    </form>
+                </section>
+            </div>
+            <div class="col-md-6 col-md-offset-2">
+                <section>
+                    <h4>Use another service to log in.</h4>
+                    <hr />
+                </section>
+            </div>
+        </div>
+    </div>
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }*@
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Care Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
+    <link rel="apple-touch-icon" href="~/pages/ico/60.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/pages/ico/76.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/pages/ico/120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/pages/ico/152.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link href="~/assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="~/assets/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="~/assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="~/pages/css/pages-icons.css" rel="stylesheet" type="text/css">
+    <link class="main-stylesheet" href="~/pages/css/pages.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        window.onload = function () {
+            // fix for windows 8
+            if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
+                document.head.innerHTML += '<link rel="stylesheet" type="text/css" href="pages/css/windows.chrome.fix.css" />'
+        }
+    </script>
+</head>
+<body class="fixed-header ">
+    <div class="register-container full-height sm-p-t-30">
+        <div class="d-flex justify-content-center flex-column full-height ">
+            <h3 style="font-family: sans-serif; font-weight: bold;">CarePortal</h3>
+            <h3>Login</h3>
+            <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" id="form-login">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group form-group-default">
+                            <label asp-for="Email"></label>
+                            <input asp-for="Email" type="email" name="Email" placeholder="" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group form-group-default">
+                            <label asp-for="Password"></label>
+                            <input asp-for="Password" type="password" name="Password" placeholder="" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row m-t-10">
+                    <div class="col-lg-6">
+                        <div class="checkbox ">
+                            <input asp-for="RememberMe" type="checkbox" aria-invalid="false">
+                            @Html.LabelFor(m => m.RememberMe)
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" class="text-info small">New user? Create an account</a>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-cons m-t-10" type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="~/assets/plugins/pace/pace.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/jquery/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/modernizr.custom.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/popper/umd/popper.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/jquery/jquery-easy.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/jquery-ios-list/jquery.ioslist.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/jquery-actual/jquery.actual.min.js"></script>
+    <script src="~/assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+    <script type="text/javascript" src="~/assets/plugins/select2/js/select2.full.min.js"></script>
+    <script type="text/javascript" src="~/assets/plugins/classie/classie.js"></script>
+    <script src="~/assets/plugins/switchery/js/switchery.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+
+    <script src="~/pages/js/pages.min.js"></script>
+    <script>
+        $(function () {
+            $('#form-login').validate()
+        })
+    </script>
+</body>
+
+</html>

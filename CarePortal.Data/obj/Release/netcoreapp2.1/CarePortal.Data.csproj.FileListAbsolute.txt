@@ -1,0 +1,11 @@
+C:\Projects\Health Portal\Source\CarePortal.Data\bin\Release\netcoreapp2.1\CarePortal.Data.deps.json
+C:\Projects\Health Portal\Source\CarePortal.Data\bin\Release\netcoreapp2.1\CarePortal.Data.runtimeconfig.json
+C:\Projects\Health Portal\Source\CarePortal.Data\bin\Release\netcoreapp2.1\CarePortal.Data.runtimeconfig.dev.json
+C:\Projects\Health Portal\Source\CarePortal.Data\bin\Release\netcoreapp2.1\CarePortal.Data.dll
+C:\Projects\Health Portal\Source\CarePortal.Data\bin\Release\netcoreapp2.1\CarePortal.Data.pdb
+C:\Projects\Health Portal\Source\CarePortal.Data\obj\Release\netcoreapp2.1\CarePortal.Data.csproj.CoreCompileInputs.cache
+C:\Projects\Health Portal\Source\CarePortal.Data\obj\Release\netcoreapp2.1\CarePortal.Data.AssemblyInfoInputs.cache
+C:\Projects\Health Portal\Source\CarePortal.Data\obj\Release\netcoreapp2.1\CarePortal.Data.AssemblyInfo.cs
+C:\Projects\Health Portal\Source\CarePortal.Data\obj\Release\netcoreapp2.1\CarePortal.Data.dll
+C:\Projects\Health Portal\Source\CarePortal.Data\obj\Release\netcoreapp2.1\CarePortal.Data.pdb
+C:\Projects\Health Portal\Source\CarePortal.Data\obj\Release\netcoreapp2.1\CarePortal.Data.csprojAssemblyReference.cache

@@ -1,0 +1,348 @@
+﻿@{
+    Layout = "";
+    ViewData["Title"] = "Video Chat";
+}
+@using CarePortal.Web.Extensions
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Care Portal</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
+    <link rel="apple-touch-icon" href="pages/ico/60.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="pages/ico/120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="pages/ico/152.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link href="~/assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="~/assets/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="~/assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="~/assets/plugins/nvd3/nv.d3.min.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="~/assets/plugins/mapplic/css/mapplic.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/plugins/rickshaw/rickshaw.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="~/assets/plugins/jquery-metrojs/MetroJs.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="~/pages/css/pages-icons.css" rel="stylesheet" type="text/css">
+    <link class="main-stylesheet" href="~/pages/css/pages.css" rel="stylesheet" type="text/css" />
+    <style>
+        .doc-search-clickable-row:hover {
+            cursor: hand;
+            cursor: pointer;
+            opacity: .9;
+        }
+    </style>
+    <link href="~/js/videochat/index.css" rel="stylesheet" />
+</head>
+<body class="fixed-header">
+    <nav class="page-sidebar" data-pages="sidebar">
+        <div class="sidebar-header" style="padding: 5px 30px;">
+            <h3 style="font-family: sans-serif; font-weight: bold; color: white;">CarePortal</h3>
+        </div>
+        <div class="sidebar-menu">
+            <ul class="menu-items">
+                @if (!string.IsNullOrEmpty(Context.Session.GetObject(StorageType.Token).ToString()) &&
+Context.Session.GetObject(StorageType.Role).ToString() == "Admin")
+                {
+                    <li class="m-t-30">
+                        <a asp-area="" asp-controller="Doctors" asp-action="Index" class="detailed">
+                            <span class="title">Doctors</span>
+                        </a>
+                        <span class="@Html.LiActive("Doctors", "bg-success") icon-thumbnail"><i class="pg-layouts"></i></span>
+                    </li>
+                }
+                @if (!string.IsNullOrEmpty(Context.Session.GetObject(StorageType.Token).ToString()) &&
+Context.Session.GetObject(StorageType.Role).ToString() == "Doctor")
+                {
+                    <li class="m-t-30">
+                        <a asp-area="" asp-controller="Dashboard" asp-action="Index" class="detailed">
+                            <span class="title">Dashboard</span>
+                        </a>
+                        <span class="@Html.LiActive("Dashboard", "bg-success") icon-thumbnail"><i class="pg-home"></i></span>
+                    </li>
+                }
+                @if (!string.IsNullOrEmpty(Context.Session.GetObject(StorageType.Token).ToString()) &&
+Context.Session.GetObject(StorageType.Role).ToString() == "Doctor")
+                {
+                    <li class="">
+                        <a asp-area="" asp-controller="Feed" asp-action="Index" class="detailed">
+                            <span class="title">Feed</span>
+                        </a>
+                        <span class="@Html.LiActive("Feed", "bg-success") icon-thumbnail"><i class="pg-grid"></i></span>
+                    </li>
+                }
+                @if (!string.IsNullOrEmpty(Context.Session.GetObject(StorageType.Token).ToString()) &&
+Context.Session.GetObject(StorageType.Role).ToString() == "Patient")
+                {
+                    <li class="m-t-30">
+                        <a asp-area="" asp-controller="Feed" asp-action="Index" class="detailed">
+                            <span class="title">Feed</span>
+                        </a>
+                        <span class="@Html.LiActive("Feed", "bg-success") icon-thumbnail"><i class="pg-grid"></i></span>
+                    </li>
+                }
+                @if (!string.IsNullOrEmpty(Context.Session.GetObject(StorageType.Token).ToString()) &&
+(Context.Session.GetObject(StorageType.Role).ToString() == "Doctor" ||
+Context.Session.GetObject(StorageType.Role).ToString() == "Patient"))
+                {
+                    <li class="">
+                        <a asp-area="" asp-controller="Email" asp-action="Index" class="detailed">
+                            <span class="title">Email</span>
+                        </a>
+                        <span class="@Html.LiActive("Email", "bg-success") icon-thumbnail"><i class="pg-mail"></i></span>
+                    </li>
+                    <li class="">
+                        <a asp-area="" asp-controller="Calendar" asp-action="Index" class="detailed">
+                            <span class="title">Calendar</span>
+                        </a>
+                        <span class="@Html.LiActive("Calendar", "bg-success") icon-thumbnail"><i class="pg-calender"></i></span>
+                    </li>
+                    <li class="">
+                        <a asp-area="" asp-controller="Appointment" asp-action="Index" class="detailed">
+                            <span class="title">Appointment</span>
+                        </a>
+                        <span class="@Html.LiActive("Appointment", "bg-success") icon-thumbnail"><i class="pg-tables"></i></span>
+                    </li>
+                }
+                @if (!string.IsNullOrEmpty(Context.Session.GetObject(StorageType.Token).ToString()) &&
+     Context.Session.GetObject(StorageType.Role).ToString() == "Patient")
+                {
+                    <li class="">
+                        <a asp-area="" asp-controller="Finance" asp-action="Index" class="detailed">
+                            <span class="title">Finance</span>
+                        </a>
+                        <span class="@Html.LiActive("Finance", "bg-success") icon-thumbnail"><i class="pg-charts"></i></span>
+                    </li>
+                }
+                @if (!string.IsNullOrEmpty(Context.Session.GetObject(StorageType.Token).ToString()) &&
+     (Context.Session.GetObject(StorageType.Role).ToString() == "Doctor" ||
+     Context.Session.GetObject(StorageType.Role).ToString() == "Patient"))
+                {
+                    <li class="">
+                        <a asp-area="" asp-controller="VideoChat" asp-action="Index" class="detailed">
+                            <span class="title">Video Chat</span>
+                        </a>
+                        <span class="@Html.LiActive("VideoChat", "bg-success") icon-thumbnail"><i class="pg-video"></i></span>
+                    </li>
+                }
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+    </nav>
+
+    <div class="page-container ">
+        <div class="header ">
+            <a href="#" class="btn-link toggle-sidebar d-lg-none pg pg-menu" data-toggle="sidebar">
+            </a>
+            <div class="">
+                <div class="brand inline" style="width: 300px;">
+                    <h3 style="font-family: sans-serif; font-weight: bold;">CarePortal</h3>
+                </div>
+
+                <a href="#" class="search-link d-lg-inline-block d-none" data-toggle="search"><i class="pg-search"></i>Type anywhere to <span class="bold">search</span> doctors</a>
+            </div>
+            <div class="d-flex align-items-center">
+                <ul class="d-lg-inline-block d-none notification-list no-margin d-lg-inline-block b-grey no-style p-l-30 p-r-20">
+                    <li class="p-r-10 inline">
+                        <div class="dropdown">
+                            <a href="javascript:;" id="notification-center" class="header-icon pg pg-world" data-toggle="dropdown">
+                                <span class="bubble"></span>
+                            </a>
+                            <div class="dropdown-menu notification-toggle" role="menu" aria-labelledby="notification-center">
+                                <div class="notification-panel">
+                                    <div class="notification-body scrollable">
+                                        <div class="notification-item  clearfix">
+                                            <div class="heading">
+                                                <a href="#" class="text-success pull-left">
+                                                    <i class="fa fa-exclamation-triangle m-r-10"></i>
+                                                    <span class="bold">New Consultation</span>
+                                                    <span class="fs-12 m-l-10">Take Action</span>
+                                                </a>
+                                                <span class="pull-right time">2 mins ago</span>
+                                            </div>
+                                            <div class="option">
+                                                <a href="#" class="mark"></a>
+                                            </div>
+                                        </div>
+                                        <div class="notification-item  clearfix">
+                                            <div class="heading">
+                                                <a href="#" class="text-warning pull-left">
+                                                    <i class="fa fa-exclamation-triangle m-r-10"></i>
+                                                    <span class="bold">New Email</span>
+                                                    <span class="fs-12 m-l-10">Read Now</span>
+                                                </a>
+                                                <span class="pull-right time">2 hours ago</span>
+                                            </div>
+                                            <div class="option">
+                                                <a href="#" class="mark"></a>
+                                            </div>
+                                        </div>
+                                        <div class="notification-item  clearfix">
+                                            <div class="heading">
+                                                <a href="#" class="text-warning pull-left">
+                                                    <i class="fa fa-exclamation-triangle m-r-10"></i>
+                                                    <span class="bold">New Email</span>
+                                                    <span class="fs-12 m-l-10">Read Now</span>
+                                                </a>
+                                                <span class="pull-right time">yesterday</span>
+                                            </div>
+                                            <div class="option">
+                                                <a href="#" class="mark"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="pull-left p-r-10 fs-14 font-heading d-lg-block d-none">
+                    <span class="semi-bold">@Context.Session.GetObject(StorageType.Username).ToString()</span>
+                </div>
+                <div class="dropdown pull-right d-lg-block d-none">
+                    <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="thumbnail-wrapper d32 circular inline">
+                            <img src="@Context.Session.GetObject(StorageType.Picture).ToString()" alt="" width="32" height="32">
+                        </span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right profile-dropdown" role="menu">
+                        <a class="dropdown-item" asp-controller="Profile" asp-action="Index"><i class="pg-settings_small"></i>Profile</a>
+                        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
+                            <a href="#" onclick="$(this).closest('form').submit()" class="clearfix bg-master-lighter dropdown-item" style="padding: 15px 20px 15px 20px;">
+                                <span class="pull-left">Logout</span>
+                                <span class="pull-right"><i class="pg-power"></i></span>
+                            </a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content-wrapper ">
+            <div class="content sm-gutter">
+                <div class="container-fluid padding-25 sm-padding-10">
+                    <div id="remote-media"></div>
+                    <div id="controls">
+                        <div id="preview">
+                            <p class="instructions">Hello Local Participant</p>
+                            <div id="local-media"></div>
+                            @*<div id="remote-media"></div>*@
+                            <button id="button-preview">Open Camera</button>
+                        </div>
+                        <div>
+                            <p class="instructions">Hello Remote Participant</p>
+                            <div id="remote-media-div"></div>
+                        </div>
+                        <div id="room-controls">
+                            <p class="instructions">Room Name:</p>
+                            <input id="room-name" type="text" placeholder="Enter a room name" />
+                            <button id="button-join">Join Room</button>
+                            <button id="button-leave">Leave Room</button>
+                        </div>
+                        <div id="log"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class=" container-fluid  container-fixed-lg footer">
+            <div class="copyright sm-text-center">
+                <p class="small no-margin pull-left sm-pull-reset">
+                    <span class="hint-text">Copyright &copy; 2019 </span>
+                    <span class="font-montserrat">CARE PORTAL</span>.
+                    <span class="hint-text">All rights reserved. </span>
+                    <span class="sm-block"><a href="#" class="m-l-10 m-r-10">Terms of use</a> <span class="muted">|</span> <a href="#" class="m-l-10">Privacy Policy</a></span>
+                </p>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay hide" data-pages="search">
+        <div class="overlay-content has-results m-t-20">
+            <div class="container-fluid">
+                <h3 class="font-montserrat no-margin text-uppercase demo-fs-23">doctors</h3>
+                <a href="#" class="close-icon-light overlay-close text-black fs-16">
+                    <i class="pg-close"></i>
+                </a>
+            </div>
+            <div class="container-fluid">
+                <input id="overlay-search" class="no-border overlay-search bg-transparent" placeholder="Search..." autocomplete="off" spellcheck="false">
+                <br>
+                <div class="inline-block">
+                    <div class="checkbox right">
+                        <input id="checkboxn" type="checkbox" value="1" checked="checked">
+                        <label for="checkboxn"><i class="fa fa-search"></i> Search within page</label>
+                    </div>
+                </div>
+                <div class="inline-block m-l-10">
+                    <p class="fs-13">Press enter to search doctors</p>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <span>
+                    <strong>suggestions :</strong>
+                </span>
+                <span id="overlay-suggestions"></span>
+                <br>
+                <div class="search-results m-t-40">
+                    <p class="bold">Pages Search Results</p>
+                    <div class="row" id="docSearchResults">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*<script src="~/assets/plugins/pace/pace.min.js" type="text/javascript"></script>*@
+    <script src="~/assets/plugins/jquery/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/modernizr.custom.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/popper/umd/popper.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/jquery/jquery-easy.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/jquery-ios-list/jquery.ioslist.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/jquery-actual/jquery.actual.min.js"></script>
+    <script src="~/assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+    <script type="text/javascript" src="~/assets/plugins/select2/js/select2.full.min.js"></script>
+    <script type="text/javascript" src="~/assets/plugins/classie/classie.js"></script>
+    <script src="~/assets/plugins/switchery/js/switchery.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/nvd3/lib/d3.v3.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/nvd3/nv.d3.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/nvd3/src/utils.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/nvd3/src/tooltip.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/nvd3/src/interactiveLayer.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/nvd3/src/models/axis.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/nvd3/src/models/line.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/nvd3/src/models/lineWithFocusChart.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/mapplic/js/hammer.min.js"></script>
+    <script src="~/assets/plugins/mapplic/js/jquery.mousewheel.js"></script>
+    <script src="~/assets/plugins/mapplic/js/mapplic.js"></script>
+    <script src="~/assets/plugins/rickshaw/rickshaw.min.js"></script>
+    <script src="~/assets/plugins/jquery-metrojs/MetroJs.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/jquery-sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/skycons/skycons.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="~/pages/js/pages.js"></script>
+    <script src="~/js/Util.js"></script>
+    <script src="~/assets/js/scripts.js" type="text/javascript"></script>
+    <script src="~/js/moment.js"></script>
+    <script type="text/javascript">
+        var doctors= @Html.Raw(Json.Serialize(Model));
+    </script>
+
+    @*<script src="~/js/videochat/jquery.min.js"></script>*@
+    <script src="~/js/videochat/twilio-video.min.js"></script>
+    <script src="~/js/videochat/index.js"></script>
+
+</body>
+</html>

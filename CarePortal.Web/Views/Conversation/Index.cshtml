@@ -1,0 +1,46 @@
+﻿@model CarePortal.Data.ViewModels.DoctorsViewModel
+@{
+    ViewData["Title"] = "Converstaion";
+}
+@section Styles{
+    <link href="~/lib/datatable/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
+}
+@section Scripts{
+    <script src="~/lib/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/lang/summernote-ko-KR.min.js"></script>
+    <script src="~/js/Conversation.js"></script>
+}
+<h1 class="mt-4">Conversation</h1>
+<div class="row">
+    <div class="col-sm-12">
+        <table id="tableQuestions" class="display" style="width:100%"></table>
+    </div>
+</div>
+
+<div id="conversationSection" style="display:none;">
+    <h3 class="mt-4" id="headerQuestion"></h3>
+    <div id="messagesSection">
+        
+    </div>
+    <div id="replySection">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-dark panel-alt timeline-post">
+                    <div class="panel-body">
+                        <textarea class="summernote" id="summernote"></textarea>
+                    </div>
+                    <div class="panel-footer" style="display: flow-root;">
+                        <div class="pull-left">
+
+                        </div>
+                        <div class="pull-right">
+                            <a href="javascript:;" id="btnSubmitQuestion" class="btn btn-primary">Send</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

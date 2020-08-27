@@ -1,0 +1,444 @@
+﻿@model CarePortal.Data.ViewModels.FeedPageModel
+@using CarePortal.Web.Extensions
+@{
+    ViewData["Title"] = "Feed";
+}
+@section Styles{
+    <link href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
+    <link href="~/assets/plugins/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/pages/css/pages.css" rel="stylesheet" />
+    <link href="~/assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="~/pages/css/pages-icons.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/plugins/bootstrap/css/bootstrap.min.css" type="text/css" />
+    <style>
+        /****** 10.10. TIMELINE ******/
+        .timeline-post .panel-body {
+            padding: 0;
+        }
+
+        .timeline-post .form-control {
+            border: 0;
+            -moz-border-radius: 3px 3px 0 0;
+            -webkit-border-radius: 3px 3px 0 0;
+            border-radius: 3px 3px 0 0;
+            resize: vertical;
+        }
+
+            .timeline-post .form-control:focus {
+                -moz-box-shdow: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+
+        .timeline-post .panel-footer {
+            padding: 10px;
+            background: #f7f7f7;
+        }
+
+        .timeline-btns {
+            padding: 5px;
+        }
+
+            .timeline-btns a {
+                display: inline-block;
+                font-size: 14px;
+                width: 20px;
+                height: 20px;
+                color: #ccc;
+                text-align: center;
+                margin-right: 5px;
+            }
+
+                .timeline-btns a:hover {
+                    color: #666;
+                }
+
+        .panel-timeline .panel-heading {
+            padding: 10px 10px 6px 10px;
+            border-bottom: 0;
+        }
+
+        .panel-timeline .panel-body {
+            padding: 0 10px;
+        }
+
+        .panel-timeline .panel-heading .media {
+            margin: 0;
+            padding: 0;
+        }
+
+        .panel-timeline .panel-heading .media-object,
+        .panel-timeline .panel-footer .media-object {
+            width: 32px;
+            border-radius: 1px;
+        }
+
+        .panel-timeline .panel-body .media {
+            margin-top: 10px;
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+
+        .panel-timeline .panel-body .media-object {
+            width: 150px;
+        }
+
+        .panel-timeline .panel-body h4 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            font-family: 'LatoBold', sans-serif;
+        }
+
+        .panel-timeline h4 {
+            margin: 0;
+            font-size: 13px;
+            line-height: normal;
+        }
+
+        .panel-timeline .panel-footer {
+            padding: 10px;
+        }
+
+            .panel-timeline .panel-footer .form-control {
+                padding: 8px 10px;
+                border-radius: 0;
+            }
+
+        .timeline-btns {
+            padding: 10px;
+        }
+
+            .timeline-btns:after {
+                clear: both;
+                display: block;
+                content: '';
+            }
+
+        .timeline-video {
+            -moz-border-radius: 3px 3px 0 0;
+            -webkit-border-radius: 3px 3px 0 0;
+            border-radius: 3px 3px 0 0;
+            overflow: hidden;
+            height: 0;
+            padding-top: 30px;
+            padding-bottom: 56.25%;
+            position: relative;
+        }
+
+            .timeline-video iframe {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                border: 0;
+                top: 0;
+                left: 0;
+            }
+
+        .submit-btn-feed {
+            padding-top: 10px;
+            margin-right: 23%;
+        }
+
+        .select-department {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+
+
+        .social-card.share .card-footer .user-pic {
+            float: left !important;
+            border-radius: 50% !important;
+            overflow: hidden !important;
+            margin-right: 10px !important;
+        }
+
+            .social-card.share .card-footer .user-pic > img {
+                width: 30px !important;
+                height: 30px !important;
+            }
+
+        .social-card.share .card-footer h5 {
+            font-size: 14px !important;
+            margin: 0 !important;
+            line-height: 22.7px !important;
+            font-family: arial !important;
+            letter-spacing: -0.006em !important;
+            margin-top: -3px !important;
+        }
+
+        .social-card.share .card-description,
+        .social-card.share .card-feed,
+        .social-card.share .card-footer {
+            border-color: transparent !important;
+            border-style: solid !important;
+            border-top: 1px solid #e6e6e6 !important;
+        }
+
+
+        .timeline {
+            position: relative !important;
+            padding: 3em 0 3em 0 !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+        }
+
+        @@media only screen and (min-width: 1170px) {
+            .timeline-container:not(.left) .timeline .timeline-point {
+                left: 85% !important;
+            }
+        }
+
+        @@media only screen and (min-width: 1170px) {
+            .timeline-container:not(.left) .timeline .timeline-content {
+                width: 78% !important;
+            }
+
+
+                .timeline-container:not(.left) .timeline .timeline-content .event-date {
+                    width: 20% !important;
+                    left: 112% !important;
+                }
+
+            .timeline-container:not(.left) .timeline .timeline-block:nth-child(even) .timeline-content {
+                float: left !important;
+            }
+
+                .timeline-container:not(.left) .timeline .timeline-block:nth-child(even) .timeline-content .event-date {
+                    left: 112% !important; /*112 to 100*/
+                    right: auto !important;
+                    position: absolute !important;
+                    width: 20% !important;
+                }
+        }
+
+        @@media only screen and (min-width: 1170px) {
+            .timeline-container:not(.left) .timeline .timeline-point {
+                left: 85% !important;
+            }
+        }
+
+        @@media only screen and (min-width: 1170px) {
+            .timeline-container:not(.left) .timeline .timeline-content {
+                width: 78% !important;
+            }
+
+            .timeline-container:not(.left) .timeline::before {
+                left: 85% !important;
+                margin-left: -2px !important;
+            }
+
+            .timeline-container:not(.left) .timeline .timeline-block:nth-child(even) .timeline-content .event-date {
+                left: auto !important;
+                right: 118% !important;
+                text-align: right !important;
+            }
+
+            .timeline-container:not(.left) .timeline .timeline-block:nth-child(even) .timeline-content .event-date {
+                left: 104% !important;
+                right: auto !important;
+                position: absolute !important;
+                width: 20% !important;
+            }
+        }
+
+        .timeline-container {
+            /* this class is used to give a max-width to the element it is applied to, and center it horizontally when it reaches that max-width */
+            width: 100% !important;
+            max-width: none !important;
+            margin: 0 auto !important;
+        }
+
+        .btn-success, .btn-success:focus {
+            color: #fff !important;
+            background-color: #10cfbd !important;
+            border-color: #10cfbd !important;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        .modalImg {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+        /*.modal-body {
+            max-height: calc(100vh - 210px);
+            overflow-y: auto;
+        }*/
+        .comment-section {
+            height: 300px !important;
+            overflow-y: auto;
+        }
+    </style>
+}
+@section Scripts{
+    <script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/lang/summernote-ko-KR.min.js"></script>
+    <script src="~/js/Feed.js"></script>
+    <script src="~/assets/js/timeline.js"></script>
+    <script src="~/assets/js/demo.js" type="text/javascript"></script>
+    <script type="text/javascript" src="~/assets/plugins/select2/js/select2.full.min.js"></script>
+    <script>
+        var UserPicture = '@Model.UserPicture';
+        var Username = '@Model.UserName';
+        var modalListFeed =@Html.Raw(Json.Serialize(Model.listFeed));
+        console.log(modalListFeed);
+    </script>
+}
+<div class="page-content-wrapper">
+    <div class="content sm-gutter">
+        <div class="container-fluid padding-25 sm-padding-10">
+            <div class="content container-fluid">
+                @if (Model.UserRole == "Doctor")
+                {
+                    <div class="container-fluid sm-p-l-5 bg-master-lightest ">
+                        <div class="row">
+                            <h3 class="font-montserrat no-margin text-uppercase demo-fs-23" style="padding-left:20px">write a blog post</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+
+                                <div class="panel-body" style="padding-top:20px;">
+                                    <textarea class="summernote" id="summernote"></textarea>
+                                </div>
+                                <div class="panel-footer">
+                                    @if (Model.listDepartmentItems != null)
+                                    {
+                                        <div class="pull-left select-department">
+                                            <label for="Department"></label>
+                                            <select for="Department" class="cs-select cs-skin-slide cs-transparent form-control" data-init-plugin="cs-select" required>
+                                                @foreach (var item in Model.listDepartmentItems)
+                                                {
+                                                    <option value="@item.Value">@item.Text</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    }
+                                    <div class="pull-right submit-btn-feed">
+                                        <a href="javascript:;" id="btnSubmitPost" class="btn btn-success">Submit Post</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (Model != null)
+                {
+                    @if (Model.listFeed.Count != 0)
+                    {
+                        <div id="ListFeed" style="margin-top: 15px;">
+                            <div class="container-fluid sm-p-l-5 bg-master-lighter ">
+                                <div class="timeline-container top-circle">
+                                    <section class="timeline">
+                                        @foreach (var item in Model.listFeed)
+                                        {
+                                            <div class="timeline-block">
+                                                <div class="timeline-point small">
+                                                </div>
+                                                <div class="timeline-content">
+                                                    <div class="card social-card share full-width">
+                                                        <div class="circle" data-toggle="tooltip" title="Label" data-container="body"></div>
+                                                        <div class="card-header  feed-description clearfix" feedIdForModal="@item.FeedId">
+                                                            <div class="user-pic">
+                                                                @if (!string.IsNullOrEmpty(item.Picture))
+                                                                {
+                                                                    <img alt="" width="33" height="33" src="@item.Picture"><br />
+                                                                }
+                                                                else
+                                                                {
+                                                                    <img alt="" width="33" height="33" src="~/images/user.jpg"><br />
+                                                                }
+                                                            </div>
+                                                            <p class="font-montserrat bold">@item.FirstName @item.LastName</p>
+                                                        </div>
+                                                        <div class="card-description" feedIdForModal="@item.FeedId" style="height:10rem;overflow:hidden;">
+                                                            <div id="content"> @Html.Raw(item.Data)</div>
+                                                        </div>
+
+                                                        <div class="card-footer clearfix">
+                                                            <ul class="reactions">
+                                                                <li>
+                                                                    <a><i class="like fa fa-thumbs-o-up"></i>@item.Likes</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a><i class="dislike fa fa-thumbs-o-down"></i>@item.Dislikes</a>
+                                                                </li>
+                                                            </ul><br />
+                                                        </div>
+                                                    </div>
+                                                    <div class="event-date">
+                                                        <small class="fs-12 hint-text timestamp">@item.Timestamp</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </section>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <a href="javascript:;" class="btn btn-success btn-flat" id="btnLoadMore" page-number="@Model.PageNumber" page-size="@Model.PageSize" style="margin-bottom: 15px;">Load More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <h1 class="mt-4">No recent post...</h1>
+                    }
+                }
+                else
+                {
+                    <h1 class="mt-4">Something went wrong. Try again later.</h1>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade slide-up disable-scroll" id="modalSlideUp" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog ">
+        <div class="modal-content-wrapper">
+            <div class="modal-content">
+                <div class="modal-header separator text-left">
+                    <div class="row">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="pg-close fs-14"></i>
+                        </button>
+                        <div class="user-pic">
+                            <img class="modalImg" id="userPicModal" alt="" width="33" height="33" src="">
+                        </div>
+                        <p class="font-montserrat bold" id="userNameModal" style="padding-left:10px;"><span class="bold"></span><br /></p>
+                    </div>
+                </div>
+                <div class="modal-body" style="padding-top:10px;">
+                    <p id="contentModal"></p>
+                </div>
+                <div class="card card-default" id="card-basic">
+                    <div class="card-header">
+                        <div class="card-controls">
+                            <ul>
+                                <li>
+                                    <a href="#" class="" data-toggle="collapse" data-target="#cardBody"><i class="fa fa-comment-o"></i></a>
+                                </li>
+                                <li>
+                                    <a><i class="like fa fa-thumbs-o-up" feed-id=""></i><text id="modalLikes" style="float:right;font-size:12px;"></text></a>
+                                </li>
+                                <li>
+                                    <a><i class="dislike fa fa-thumbs-o-down" feed-id=""></i><text id="modalDislikes" style="float:right;font-size:12px;"></text></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body collapse comment-section" id="cardBody">
+                    <div class="posted-comments-modal"></div>
+                    <div class="new-comment-modal"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+{
+  "Token": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MUBoZWFsdGhwb3J0YWwuY29tIiwianRpIjoiN2FiNGQzNWUtNjhhMy00YWIwLWI0MmEtYjA4ODgwZDhjOTUxIiwiaWF0IjoxNTYxNDU0MTAwLCJyb2wiOiJhcGlfYWNjZXNzIiwiaWQiOiIwZGM5MzE1Ni1jNWI1LTRiMTctODlmMi03YjBmM2FlNjE4MTQiLCJuYmYiOjE1NjE0NTQwOTksImV4cCI6MTU2MTQ5NzI5OX0.2gLRH79ijXT3ZCIa976Fzu7u2zHetjAEk_a4PUe975k\"",
+  "UserId": "\"0dc93156-c5b5-4b17-89f2-7b0f3ae61814\"",
+  "Username": "\"patient1@healthportal.com\"",
+  "Picture": "\"/images/user.jpg\"",
+  "Role": "\"Patient\"",
+  "Name": "\"Patient One\""
+}

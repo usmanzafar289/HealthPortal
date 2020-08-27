@@ -1,0 +1,102 @@
+﻿@model CarePortal.Data.ViewModels.ProfileViewModel
+@using CarePortal.Web.Extensions
+@{
+    ViewData["Title"] = "Profile";
+}
+@section Styles{
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <style>
+        textarea {
+            width: 100%;
+        }
+
+        .full-width {
+            width: 100% !important;
+        }
+
+        .profile-image {
+            border-radius: 50%;
+            height: 350px;
+            width: 350px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .user-description {
+            height: 100px !important;
+        }
+
+        #imageUpload {
+            display: none;
+        }
+
+        #profileImage {
+            cursor: pointer;
+        }
+    </style>
+}
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script src="~/js/Profile.js"></script>
+}
+<div class="page-content-wrapper ">
+    <div class="content sm-gutter">
+        <div class=" container-fluid padding-25 sm-padding-10">
+            @*<h3 class="font-montserrat no-margin text-uppercase demo-fs-23" style="padding-left:20px">Profile</h3>*@
+            @*<div class="row">
+                    <h3 class="font-montserrat no-margin text-uppercase demo-fs-23" style="padding-left:20px">Profile</h3>
+                </div>*@
+            <div class="card card-transparent">
+                <div class="card-header ">
+                    <div class="card-title">
+                        Profile
+                    </div>
+                    <div class="pull-right">
+
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="tab-pane padding-20 sm-no-padding slide-left active show" style="background: white;">
+                    @using (Html.BeginForm("Update", "Profile", FormMethod.Post, new { @id = "form-profile" }))
+                    {
+                        <input type="hidden" id="base64Picture" name="base64Picture" />
+                        <div class="row">
+                            <div class="col-sm-5 b-r b-dashed b-grey sm-b-b">
+                                <div class="form-group">
+                                    <label>Photo</label>
+                                    <image id="profileImage" src="@Model.Picture" class="thumbnail img-responsive form-control profile-image" />
+                                    <input id="imageUpload" type="file" name="profile_photo" placeholder="Photo" class="form-control">
+                                    <p id="b64" style="display:none;"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <h2 class="profile-name">@Model.UserName</h2>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-bottom: 10px;">
+                                    <label>About</label>
+                                    @Html.TextArea("Description", Model.Description, new { @class = "form-control user-description", @placeholder = "Briefly Describe yourself" })
+                                </div>
+                                <div class="row">
+                                    <label>Specialities</label>
+                                    @Html.ListBoxFor(m => m.UserSelectedDepartmentsIds, new MultiSelectList(Model.listDepartment, "DepartmentId", "Name"), new { @class = "js-example-basic-multiple full-width", multiple = "multiple" })
+                                </div>
+                            </div>
+                        </div>
+                        @if (Model.canUpdate)
+                        {
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <input type="submit" value="Save Profile" class="btn btn-success pull-right" />
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

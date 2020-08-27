@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CarePortal.API</name>
+    </assembly>
+    <members>
+        <member name="M:CarePortal.API.Controllers.AccountController.RegisterUserAsync(CarePortal.API.Requests.PostAccountRequest)">
+            <summary>
+            Register User
+            </summary>
+            <param name="request">Request model</param>
+            <returns>A response with new user</returns>
+            <response code="200">Returns the created user</response>
+            <response code="201">A response as user created successfully</response>
+            <response code="400">For bad request</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
+        <member name="M:CarePortal.API.Controllers.DepartmentController.GetDepartmentAsync(System.Int32,System.Int32,System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.DateTime})">
+            <summary>
+            Retrieves department items
+            </summary>
+            <param name="pageSize">Page size</param>
+            <param name="pageNumber">Page number</param>
+            <param name="DepartmentId">DepartmentId</param>
+            <param name="Name">Name</param>
+            <param name="Description">Description</param>
+            <param name="IsDelete">IsDelete</param>
+            <param name="Timestamp">Timestamp</param>
+            <returns>A response with stock items list</returns>
+            <response code="200">Returns the stock items list</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
+        <member name="M:CarePortal.API.Controllers.DepartmentController.GetDepartmentAsync(System.Int32)">
+            <summary>
+            Retrieves a department by Id
+            </summary>
+            <param name="id">Department Id</param>
+            <returns>A response with Department</returns>
+            <response code="200">Returns the departments list</response>
+            <response code="404">If department is not exists</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
+        <member name="M:CarePortal.API.Controllers.DepartmentController.PostStockItemAsync(CarePortal.API.Requests.PostDepartmentRequest)">
+            <summary>
+            Creates a new department
+            </summary>
+            <param name="request">Request model</param>
+            <returns>A response with new department</returns>
+            <response code="200">Returns the departments list</response>
+            <response code="201">A response as creation of department</response>
+            <response code="400">For bad request</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
+        <member name="M:CarePortal.API.Controllers.DepartmentController.PutDepartmentAsync(System.Int32,CarePortal.API.Requests.PutDepartmentRequest)">
+            <summary>
+            Updates an existing department
+            </summary>
+            <param name="id">Department Id</param>
+            <param name="request">Request model</param>
+            <returns>A response as update department result</returns>
+            <response code="200">If department was updated successfully</response>
+            <response code="400">For bad request</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
+        <member name="M:CarePortal.API.Controllers.DepartmentController.DeleteDepartmentAsync(System.Int32)">
+            <summary>
+            Deletes an existing department
+            </summary>
+            <param name="id">Department Id</param>
+            <returns>A response as delete department result</returns>
+            <response code="200">If department was deleted successfully</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
+    </members>
+</doc>
